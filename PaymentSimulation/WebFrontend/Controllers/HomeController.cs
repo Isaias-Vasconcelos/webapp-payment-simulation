@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using WebFrontend.Models;
 using WebFrontend.Services;
@@ -13,6 +14,7 @@ public class HomeController(ILogger<HomeController> logger, ProductService produ
 
     public async Task<IActionResult> Index()
     {
+        _logger.LogInformation($"STEP -> Preparing the catalog model");
         var catalog = await _productService.GetCatalogo();
         return View(catalog);
     }

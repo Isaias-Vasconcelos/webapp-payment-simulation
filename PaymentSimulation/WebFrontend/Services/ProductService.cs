@@ -3,12 +3,13 @@ using WebFrontend.Models;
 
 namespace WebFrontend.Services;
 
-public class ProductService(IHttpService httpService)
+public class ProductService(IHttpService httpService, ILogger<ProductService> logger)
 {
     public async Task<CatalogModel> GetCatalogo()
     {
         try
         {
+            logger.LogInformation("STEP -> Searching for items in the API");
             var response = await httpService.GetAsync<ProductModel>("/api/product/get");
             return new CatalogModel
             {
@@ -62,7 +63,7 @@ public class ProductService(IHttpService httpService)
             };
 
         paymentModel.Amount = product.Price;
-        
+
         var payment = await httpService.PostAsync<PaymentModel>("/api/payment/post", paymentModel);
         return payment;
     }

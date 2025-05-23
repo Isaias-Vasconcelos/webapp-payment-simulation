@@ -1,0 +1,38 @@
+## Compilação
+bin/
+obj/
+
+## Usuário
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Cache do VS
+.vs/
+
+## Arquivos de pacote
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+
+## Arquivos temporários
+*.log
+*.tmp
+*.bak
+
+## Configurações locais
+appsettings.Development.json
+
+## Arquivos do Rider
+.idea/
+
+## Logs
+logs/
+*.log
+
+## Outros
+*.db
+*.DS_Store

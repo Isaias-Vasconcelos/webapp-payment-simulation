@@ -1,4 +1,5 @@
-﻿using WebRestApi.Dto;
+﻿using System.Text.Json;
+using WebRestApi.Dto;
 
 namespace WebRestApi.Services.Implementations;
 
@@ -6,6 +7,7 @@ public class PaymentService:IPaymentService
 {
     public async Task<Response<PaymentDto>> CreatePaymentService(PaymentDto payment)
     {
+        Console.WriteLine(JsonSerializer.Serialize(payment));
         return new Response<PaymentDto>(payment);
     }
 }
