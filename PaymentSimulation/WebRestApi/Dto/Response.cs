@@ -20,4 +20,10 @@ public class Response<T> where T : class
         IsSuccess = isSuccess;
         Message = message;
     }
+
+    public Response(string message)
+    {
+        IsSuccess = false;
+        Message = message;
+    }
 }

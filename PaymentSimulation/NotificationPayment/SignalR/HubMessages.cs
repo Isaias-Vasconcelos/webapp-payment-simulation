@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 
-namespace NotificationPayment.SignalR;
+namespace StatusPayment.SignalR;
 
 public class HubMessages:Hub
 {

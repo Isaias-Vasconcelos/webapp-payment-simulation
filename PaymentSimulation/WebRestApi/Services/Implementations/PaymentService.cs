@@ -7,7 +7,6 @@ public class PaymentService:IPaymentService
 {
     public async Task<Response<PaymentDto>> CreatePaymentService(PaymentDto payment)
     {
-        Console.WriteLine(JsonSerializer.Serialize(payment));
         return new Response<PaymentDto>(payment);
     }
 }

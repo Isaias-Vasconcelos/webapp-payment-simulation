@@ -1,3 +1,3 @@
 ﻿namespace WebRestApi.Dto;
 
-public record PaymentDto(Guid Id, string SocketId, CardInfoDto Card, decimal Amount, string Status);
+public record PaymentDto(Guid Id, string? SocketId,string? ProductId, CardDto Card, string? Status);

@@ -1,7 +1,9 @@
-﻿using WebRestApi.Messaging.RabbitMQ;
+﻿using FluentValidation;
+using WebRestApi.Messaging.RabbitMQ;
 using WebRestApi.Repository;
 using WebRestApi.Services;
 using WebRestApi.Services.Implementations;
+using WebRestApi.Validators;
 
 namespace WebRestApi.Extensions;
 
@@ -12,7 +14,8 @@ public static class Configuration
         services
             .AddServices()
             .AddRepositories()
-            .AddEventBus();
+            .AddEventBus()
+            .AddValidators();
     }
 
     private static IServiceCollection AddServices(this IServiceCollection services)
@@ -34,6 +37,12 @@ public static class Configuration
     {
         services
             .AddScoped<IRabbitMQService, RabbitMQService>();
+        return services;
+    }
+
+    private static IServiceCollection AddValidators(this IServiceCollection services)
+    {
+        services.AddValidatorsFromAssemblyContaining<PaymentValidator>();
         return services;
     }
 }

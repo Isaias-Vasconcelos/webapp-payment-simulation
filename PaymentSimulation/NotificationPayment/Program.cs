@@ -1,4 +1,4 @@
-using NotificationPayment.SignalR;
+using StatusPayment.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 

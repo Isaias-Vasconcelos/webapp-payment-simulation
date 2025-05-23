@@ -1,19 +1,20 @@
+using Serilog;
 using WebRestApi.Extensions;
-using WebRestApi.Services;
-using WebRestApi.Services.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+Log.Logger = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .CreateLogger();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IProductService, ProductService>();
-
 builder.Services.ConfigureServices();
+builder.Host.UseSerilog();
 
 var app = builder.Build();
 
