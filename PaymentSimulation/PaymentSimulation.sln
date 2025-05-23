@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.36105.23 d17.13
+VisualStudioVersion = 17.13.36105.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{EB0841BC-AE57-449E-BC7B-3E05EB36556F}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebRestApi", "WebRestApi\WebRestApi.csproj", "{F1E59B31-A073-4938-AA15-3551AFC25FD2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebFrontend", "WebFrontend\WebFrontend.csproj", "{368F1404-54BF-44D0-A917-CDF80303816C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailPayment", "EmailPayment\EmailPayment.csproj", "{577DCC2D-C7A8-422F-8D2E-F8A0511DD694}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{368F1404-54BF-44D0-A917-CDF80303816C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{368F1404-54BF-44D0-A917-CDF80303816C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{368F1404-54BF-44D0-A917-CDF80303816C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{577DCC2D-C7A8-422F-8D2E-F8A0511DD694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{577DCC2D-C7A8-422F-8D2E-F8A0511DD694}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{577DCC2D-C7A8-422F-8D2E-F8A0511DD694}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{577DCC2D-C7A8-422F-8D2E-F8A0511DD694}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
