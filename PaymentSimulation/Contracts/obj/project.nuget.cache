@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "sY5+D/k+TiA=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\isaia\\SISTEMAS\\Estudo\\webapp-payment-simulation\\PaymentSimulation\\Contracts\\Contracts.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\isaia\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.14\\microsoft.netcore.app.ref.8.0.14.nupkg.sha512",
+    "C:\\Users\\isaia\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.14\\microsoft.windowsdesktop.app.ref.8.0.14.nupkg.sha512",
+    "C:\\Users\\isaia\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.14\\microsoft.aspnetcore.app.ref.8.0.14.nupkg.sha512"
+  ],
+  "logs": []
+}

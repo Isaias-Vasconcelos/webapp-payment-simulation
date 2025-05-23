@@ -1,0 +1,97 @@
+﻿body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.checkout-container {
+    background: #ffffff;
+    padding: 40px 30px;
+    max-width: 500px;
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.checkout-header h1 {
+    margin: 0;
+    font-size: 28px;
+    color: #333;
+}
+
+.product-box {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+    border: 1px solid #dee2e6;
+}
+
+.product-box p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #444;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #0d6efd;
+    outline: none;
+}
+
+.form-actions {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.btn-submit {
+    background: #0d6efd;
+    color: white;
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-submit:hover {
+    background: #0b5ed7;
+}
+
+@media (max-width: 600px) {
+    .checkout-container {
+        padding: 25px 20px;
+    }
+}

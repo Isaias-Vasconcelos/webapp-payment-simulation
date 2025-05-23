@@ -1,0 +1,28 @@
+﻿@model CatalogModel
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Catálogo de Produtos</title>
+  <link rel="stylesheet" href="css/catolog.css" asp-append-version="true"/>
+</head>
+<body>
+
+<h1>Catálogo de Produtos</h1>
+
+<div class="catalog">
+
+  @foreach (var product in Model.Products)
+  {
+    <div class="product-card">
+      <div class="product-name">@product.Name</div>
+      <div class="product-price">R$ @product.Price.ToString("N2")</div>
+      <a href="/Home/Checkout?productId=@product.Id" target="_blank" class="buy-btn">Comprar</a>
+    </div>
+  }
+</div>
+
+</body>
+</html>
