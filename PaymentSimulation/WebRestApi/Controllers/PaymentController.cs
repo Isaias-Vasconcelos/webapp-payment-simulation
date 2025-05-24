@@ -20,6 +20,10 @@ public class PaymentController(IPaymentService paymentService, IValidator<Paymen
         if (!validatorPayment.IsValid)
         {
             logger.LogError($"ERROR [CONTROLLER] -> Check the fields! [{payment.ProductId}]");
+            foreach (var e in validatorPayment.Errors)
+            {
+                Console.WriteLine(e.ErrorMessage);
+            }
             return BadRequest(new Response<PaymentDto>("Error! Check the fields!"));
         }
 

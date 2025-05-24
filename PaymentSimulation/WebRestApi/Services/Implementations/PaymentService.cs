@@ -16,6 +16,7 @@ public class PaymentService(IProductRepository productRepository, IPaymentAsync 
         {
             Id = Guid.NewGuid(),
             payment.SocketId,
+            payment.Email,
             payment.Card.CardNumber,
             payment.Card.CardName,
             payment.Card.CardExpiry,

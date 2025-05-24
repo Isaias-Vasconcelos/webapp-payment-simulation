@@ -1,11 +1,26 @@
 using Serilog;
+using Serilog.Sinks.PostgreSQL;
 using WebRestApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var columnWriters = new Dictionary<string, ColumnWriterBase>
+{
+    {"message", new RenderedMessageColumnWriter()},
+    {"message_template", new MessageTemplateColumnWriter()},
+    {"level", new LevelColumnWriter()},
+    {"timestamp", new TimestampColumnWriter()},
+    {"exception", new ExceptionColumnWriter()},
+    {"log_event", new LogEventSerializedColumnWriter()}
+};
+
 Log.Logger = new LoggerConfiguration()
-    .Enrich.FromLogContext()
-    .WriteTo.Console()
+    .WriteTo.PostgreSQL(
+        connectionString: Environment.GetEnvironmentVariable("DATABASE_URL"),
+        tableName: "log_api_web",
+        needAutoCreateTable: true,
+        columnOptions: columnWriters
+    )
     .CreateLogger();
 
 builder.Services.AddControllers();

@@ -3,7 +3,7 @@ using Contracts.Events;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
-namespace ProcessPayment.Consumers;
+namespace ProcessPayment.Consumer;
 public class PaymentConsumer(IPublishEndpoint publishEndpoint, ILogger<PaymentConsumer> logger): IConsumer<IProcessPayment>
 {
     public async Task Consume(ConsumeContext<IProcessPayment> context)
@@ -13,6 +13,7 @@ public class PaymentConsumer(IPublishEndpoint publishEndpoint, ILogger<PaymentCo
         {
             context.Message.Id,
             context.Message.SocketId,
+            context.Message.Email,
             Status = ApprovedRecused(context.Message.Amount),
             context.Message.Amount,
             ProcessedDate = DateTime.UtcNow

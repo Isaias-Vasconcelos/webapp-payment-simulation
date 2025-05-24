@@ -5,6 +5,7 @@ const cardNumberField = document.getElementById("CardNumber");
 const cardNameField = document.getElementById("CardName");
 const cardExpiryField = document.getElementById("CardExpiry");
 const cardCvvField = document.getElementById("CardCvv");
+const emailField = document.getElementById("Email");
 
 const modal = document.getElementById('modalLoading');
 const spinner = document.getElementById('spinner');
@@ -35,6 +36,7 @@ formPayment.addEventListener("submit", async function (e) {
     const payload = {
         productId: productIdField.value,
         socketId: socketId,
+        email: emailField.value,
         card: {
             cardNumber: cardNumberField.value,
             cardName: cardNameField.value,

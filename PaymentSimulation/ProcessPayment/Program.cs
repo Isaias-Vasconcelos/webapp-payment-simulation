@@ -1,8 +1,8 @@
-﻿using ProcessPayment.Consumers;
+﻿using ProcessPayment.Consumer;
 using MassTransit;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using Serilog.Sinks.PostgreSQL;
 
 namespace ProcessPayment;
 
@@ -10,10 +10,23 @@ public static class Program
 {
     public static async Task Main(string[] args)
     {
+        var columnWriters = new Dictionary<string, ColumnWriterBase>
+        {
+            {"message", new RenderedMessageColumnWriter()},
+            {"message_template", new MessageTemplateColumnWriter()},
+            {"level", new LevelColumnWriter()},
+            {"timestamp", new TimestampColumnWriter()},
+            {"exception", new ExceptionColumnWriter()},
+            {"log_event", new LogEventSerializedColumnWriter()}
+        };
+
         Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Debug()
-            .Enrich.FromLogContext()
-            .WriteTo.Console()
+            .WriteTo.PostgreSQL(
+                connectionString: Environment.GetEnvironmentVariable("DATABASE_URL"),
+                tableName: "log_service_process_payment",
+                needAutoCreateTable: true,
+                columnOptions: columnWriters
+            )
             .CreateLogger();
 
         try

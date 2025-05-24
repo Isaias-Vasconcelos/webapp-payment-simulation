@@ -7,8 +7,17 @@ namespace WebRestApi.Validators
     {
         public PaymentValidator()
         {
-            RuleFor(p => p.SocketId).NotNull().NotEmpty();
-            RuleFor(p => p.ProductId).NotNull().NotEmpty();
+            RuleFor(p => p.SocketId)
+                .NotNull()
+                .NotEmpty();
+            
+            RuleFor(p => p.ProductId)
+                .NotNull()
+                .NotEmpty();
+            
+            RuleFor(p => p.Email)
+                .EmailAddress()
+                .WithMessage("Invalid Email Address");
 
             RuleFor(p => p.Card.CardNumber)
                 .CreditCard()

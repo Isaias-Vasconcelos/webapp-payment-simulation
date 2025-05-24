@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Cont
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessPayment", "ProcessPayment\ProcessPayment.csproj", "{33ACA9D6-9746-4DCE-9C7F-B6CAEDCF6C1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatusPayment", "NotificationPayment\StatusPayment.csproj", "{03697B29-1455-4403-A58D-D87C51E6F7FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatusPayment", "StatusPayment\StatusPayment.csproj", "{03697B29-1455-4403-A58D-D87C51E6F7FF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebRestApi", "WebRestApi\WebRestApi.csproj", "{F1E59B31-A073-4938-AA15-3551AFC25FD2}"
 EndProject
