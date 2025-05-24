@@ -58,26 +58,15 @@ public class ProductService(IHttpService httpService, ILogger<ProductService> lo
     public async Task<ResponseModel<PaymentModel>> PaymentProduct(PaymentModel paymentModel)
     {
         logger.LogInformation($"STEP [SERVICE] -> Sending informations for the payment [{paymentModel.ProductId}]");
-        var product = (await GetProduct(paymentModel.ProductId))
-            ?.Entities?.FirstOrDefault();
-
-        if (product is null)
-        {
-            logger.LogError($"ERROR [SERVICE] -> Product not found [{paymentModel.ProductId}]");
-            return new ResponseModel<PaymentModel>
-            {
-                IsSuccess = false,
-                Message = "Product not found",
-            };
-        }
 
         StringContent json = new(JsonSerializer.Serialize(paymentModel), Encoding.UTF8, "application/json");
-
         var payment = await httpService.PostAsync<PaymentModel>("/api/payment/post", json);
+
         if (payment.IsSuccess)
             logger.LogInformation($"STEP [SERVICE] -> Payment sending [{paymentModel.ProductId}]");
         else
             logger.LogError($"ERROR [SERVICE] -> Error sending payment [{paymentModel.ProductId}] ({payment.Message})");
+            
         return payment;
     }
 

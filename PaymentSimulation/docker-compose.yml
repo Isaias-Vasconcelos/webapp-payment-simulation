@@ -11,6 +11,11 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - rabbitmq-network
 
@@ -19,7 +24,8 @@ services:
       context: .
       dockerfile: ProcessPayment/Dockerfile
     depends_on:
-      - rabbitmq
+      rabbitmq:
+        condition: service_healthy
     environment:
       - RABBITMQ_HOST=rabbitmq
       - ASPNETCORE_URLS=http://+:80
@@ -27,17 +33,18 @@ services:
     networks:
       - rabbitmq-network
 
-  notification-payment:
+  status-payment:
     build:
       context: .
       dockerfile: StatusPayment/Dockerfile
     depends_on:
-      - rabbitmq
+      rabbitmq:
+        condition: service_healthy
     ports:
       - "5003:80"
     environment:
       - RABBITMQ_HOST=rabbitmq
-      - FRONTEND_URL=http://webfrontend
+      - FRONTEND_URL=http://localhost:5000
       - ASPNETCORE_URLS=http://+:80
       - ASPNETCORE_ENVIRONMENT=Development
     networks:
@@ -48,7 +55,8 @@ services:
       context: .
       dockerfile: WebRestApi/Dockerfile
     depends_on:
-      - rabbitmq
+      rabbitmq:
+        condition: service_healthy
     ports:
       - "5001:80"
     environment:

@@ -14,7 +14,7 @@ const message = document.getElementById('modalMessage');
 let socketId = null;
 
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("http://notification-payment/notifications")
+    .withUrl("http://localhost:5003/notifications")
     .build();
 
 connection.start().then(() => {
@@ -23,7 +23,7 @@ connection.start().then(() => {
 }).catch(err => console.error("Erro connection ws", err));
 
 connection.on("PaymentProcessed", (msg) => {
-    if(msg.Status === "APPROVED")
+    if(msg.status === "APPROVED")
         paymentApproved()
     else 
         paymentError();

@@ -8,7 +8,7 @@ public class PaymentConsumer(IPublishEndpoint publishEndpoint, ILogger<PaymentCo
 {
     public async Task Consume(ConsumeContext<IProcessPayment> context)
     {
-        logger.LogInformation("[MICROSERVICE] -> Processing payment...");
+        logger.LogInformation($"[MICROSERVICE] -> Processing payment... [{context.Message.Id}]");
         await publishEndpoint.Publish<IPaymentProcessed>(new
         {
             context.Message.Id,
@@ -17,7 +17,7 @@ public class PaymentConsumer(IPublishEndpoint publishEndpoint, ILogger<PaymentCo
             context.Message.Amount,
             ProcessedDate = DateTime.UtcNow
         });
-        logger.LogInformation("[MICROSERVICE] -> Processed payment.");
+        logger.LogInformation($"[MICROSERVICE] -> Processed payment. [{context.Message.Id}]");
     }
 
     private static string ApprovedRecused(decimal amount)

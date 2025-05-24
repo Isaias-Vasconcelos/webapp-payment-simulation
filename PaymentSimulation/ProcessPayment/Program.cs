@@ -36,7 +36,7 @@ public static class Program
                                 h.Password("guest");
                             });
 
-                            cfg.ReceiveEndpoint("payment-process", e =>
+                            cfg.ReceiveEndpoint("process-payment", e =>
                             {
                                 e.ConfigureConsumer<PaymentConsumer>(context);
                             });

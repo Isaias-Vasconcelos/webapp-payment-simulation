@@ -8,10 +8,10 @@ public class PaymentService(IProductRepository productRepository, IPaymentAsync 
 {
     public async Task<Response<PaymentDto>> CreatePaymentService(PaymentDto payment)
     {
-        logger.LogInformation("STEP [SERVICE] -> Searching price for product");
+        logger.LogInformation($"STEP [SERVICE] -> Searching price for product [{payment.ProductId}]");
         var productPrice = productRepository.GetProductRepository(payment.ProductId);
         
-        logger.LogInformation("STEP [SERVICE] -> Sending payment for service process");
+        logger.LogInformation($"STEP [SERVICE] -> Sending payment for service process [{payment.ProductId}]");
         await paymentAsync.SendPayment(new
         {
             Id = Guid.NewGuid(),

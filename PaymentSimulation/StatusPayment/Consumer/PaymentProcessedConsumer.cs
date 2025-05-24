@@ -10,7 +10,7 @@ public class PaymentProcessedConsumer(IHubContext<HubMessages> hubContext, ILogg
     public async Task Consume(ConsumeContext<IPaymentProcessed> context)
     {
         logger.LogInformation($"STEP [MICROSERVICE] -> Sending status for the payment [{context.Message.Id}]");
-        await hubContext.Clients.User(context.Message.SocketId).SendAsync("PaymentProcessed", new
+        await hubContext.Clients.Client(context.Message.SocketId).SendAsync("PaymentProcessed", new
         {
             context.Message.Id,
             context.Message.Amount,
