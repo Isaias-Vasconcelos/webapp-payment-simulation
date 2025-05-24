@@ -1,5 +1,5 @@
 
-# 💳 Sistema de Pagamentos Distribuído com RabbitMQ e ASP.NET Core
+# 💳 Sistema de Pagamentos Simples Distribuído com RabbitMQ e ASP.NET Core
 
 Este projeto demonstra uma arquitetura de microserviços em .NET utilizando comunicação assíncrona com **MassTransit + RabbitMQ**, incluindo serviços REST, WebSocket (SignalR) e frontend ASP.NET MVC.
 
