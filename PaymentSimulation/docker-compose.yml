@@ -55,9 +55,9 @@ services:
      rabbitmq:
       condition: service_healthy
     environment:
-     - SMTP_SERVER=smtp.mailersend.net
-     - EMAIL_USER=MS_a8WmKU@test-r6ke4n1wx2egon12.mlsender.net
-     - EMAIL_PASSWORD=mssp.JASV1w6.351ndgw81z5gzqx8.ZtTAPLz
+     - SMTP_SERVER=
+     - EMAIL_USER=
+     - EMAIL_PASSWORD=
      - DATABASE_URL=Host=database-log;Port=5432;Username=postgres;Password=adminlog;Database=db_log;
     networks:
      - services-network
