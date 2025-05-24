@@ -14,13 +14,20 @@ const message = document.getElementById('modalMessage');
 let socketId = null;
 
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("http://localhost:5290/notifications")
+    .withUrl("http://notification-payment/notifications")
     .build();
 
 connection.start().then(() => {
     socketId = connection.connectionId;
-    console.log("Conectado ao SignalR com socketId:", socketId);
-}).catch(err => console.error("Erro ao conectar SignalR:", err));
+    console.log("Server ws connected!", socketId);
+}).catch(err => console.error("Erro connection ws", err));
+
+connection.on("PaymentProcessed", (msg) => {
+    if(msg.Status === "APPROVED")
+        paymentApproved()
+    else 
+        paymentError();
+})
 
 formPayment.addEventListener("submit", async function (e) {
     e.preventDefault();
@@ -49,16 +56,11 @@ formPayment.addEventListener("submit", async function (e) {
         });
 
         const data = await response.json();
-
-        setTimeout(() => {
-            if (!data.isSuccess) {
-                paymentError(data.message);
-            } else {
-                paymentApproved();
-            }
-        }, 2000);
-
-
+        
+        if(!data.isSuccess) {
+            paymentError(data.message);
+        }
+        
         setTimeout(() => modal.close(), 3000);
 
     } catch (error) {

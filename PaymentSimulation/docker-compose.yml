@@ -1,0 +1,78 @@
+version: "3.9"
+
+services:
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"     
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - rabbitmq-network
+
+  process-payment:
+    build:
+      context: .
+      dockerfile: ProcessPayment/Dockerfile
+    depends_on:
+      - rabbitmq
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - rabbitmq-network
+
+  notification-payment:
+    build:
+      context: .
+      dockerfile: StatusPayment/Dockerfile
+    depends_on:
+      - rabbitmq
+    ports:
+      - "5003:80"
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - FRONTEND_URL=http://webfrontend
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - rabbitmq-network
+
+  webrestapi:
+    build:
+      context: .
+      dockerfile: WebRestApi/Dockerfile
+    depends_on:
+      - rabbitmq
+    ports:
+      - "5001:80"
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - rabbitmq-network
+
+  webfrontend:
+    build:
+      context: .
+      dockerfile: WebFrontend/Dockerfile
+    depends_on:
+      - webrestapi
+    ports:
+      - "5000:80"
+    environment:
+      - BACKEND_URL=http://webrestapi
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - rabbitmq-network
+
+networks:
+  rabbitmq-network:
+    driver: bridge

@@ -9,7 +9,7 @@ public static class Configuration
     {
         services.AddHttpClient<IHttpService, HttpService>(p =>
         {
-            p.BaseAddress = new Uri("http://localhost:5131");
+            p.BaseAddress = new Uri(Environment.GetEnvironmentVariable("BACKEND_URL") ?? "http://localhost:5000");
             p.DefaultRequestHeaders.Add("Accept", "application/json");
         });
         

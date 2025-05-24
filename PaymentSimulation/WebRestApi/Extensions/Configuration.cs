@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
-using WebRestApi.Messaging.RabbitMQ;
+using MassTransit;
+using WebRestApi.Messaging;
 using WebRestApi.Repository;
 using WebRestApi.Services;
 using WebRestApi.Services.Implementations;
@@ -22,21 +23,35 @@ public static class Configuration
     {
         services.AddScoped<IProductService, ProductService>()
             .AddScoped<IPaymentService, PaymentService>();
-        
+
         return services;
     }
 
     private static IServiceCollection AddRepositories(this IServiceCollection services)
     {
         services.AddScoped<IProductRepository, ProductRepository>();
-        
+
         return services;
     }
 
     private static IServiceCollection AddEventBus(this IServiceCollection services)
     {
         services
-            .AddScoped<IRabbitMQService, RabbitMQService>();
+            .AddScoped<IPaymentAsync, PaymentAsync>();
+
+
+        services.AddMassTransit(c =>
+        {
+            c.UsingRabbitMq((context, configurator) =>
+            {
+                configurator.Host("rabbitmq", "/", host =>
+                {
+                    host.Username("guest");
+                    host.Password("guest");
+                });
+            });
+        });
+
         return services;
     }
 

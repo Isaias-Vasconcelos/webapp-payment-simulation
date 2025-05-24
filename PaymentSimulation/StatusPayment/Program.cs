@@ -1,3 +1,6 @@
+using MassTransit;
+using Serilog;
+using StatusPayment.Consumer;
 using StatusPayment.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,15 +13,41 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR();
 
+Log.Logger = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .CreateLogger();
+
+builder.Host.UseSerilog();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", policy =>
     {
         policy
-            .WithOrigins("http://localhost:5141") // origem do seu frontend
+            .WithOrigins(Environment.GetEnvironmentVariable("FRONTEND_URL") ?? "http://localhost:5141")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
+    });
+});
+
+builder.Services.AddMassTransit(c =>
+{
+    c.AddConsumer<PaymentProcessedConsumer>();
+
+    c.UsingRabbitMq((context, configurator) =>
+    {
+        configurator.Host("rabbitmq", "/",h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+
+        configurator.ReceiveEndpoint("payment-processed-status-queue", c =>
+        {
+            c.ConfigureConsumer<PaymentProcessedConsumer>(context);
+        });
     });
 });
 

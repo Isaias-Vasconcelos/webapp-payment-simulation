@@ -6,6 +6,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["ProcessPayment/ProcessPayment.csproj", "ProcessPayment/"]
+COPY ["Contracts/Contracts.csproj", "Contracts/"]
 RUN dotnet restore "ProcessPayment/ProcessPayment.csproj"
 COPY . .
 WORKDIR "/src/ProcessPayment"
