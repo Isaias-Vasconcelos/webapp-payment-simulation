@@ -3,6 +3,9 @@
 
 Este projeto demonstra uma arquitetura de microserviços em .NET utilizando comunicação assíncrona com **MassTransit + RabbitMQ**, incluindo serviços REST, WebSocket (SignalR) e frontend ASP.NET MVC.
 
+
+![Fluxograma](https://github.com/user-attachments/assets/6f981128-288b-4645-aa26-bf71600b5076)
+
 ## 📦 Serviços incluídos
 
 | Serviço                | Porta | Descrição                                                 |
