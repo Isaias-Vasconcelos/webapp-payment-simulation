@@ -32,7 +32,7 @@ Certifique-se de que você tem o **Docker** e **Docker Compose** instalados.
 2. Compile e inicie os containers:
 
    ```bash
-   docker-compose up --build
+   docker-compose up -d
    ```
 
 3. Acesse os serviços nos navegadores:
